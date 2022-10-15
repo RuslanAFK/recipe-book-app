@@ -7,36 +7,44 @@ export const logout = createAction(
 
 export const loginStart = createAction(
   '[Auth] LOGIN_START',
-  props<{payload: {
-    email: string,
-    password: string,
-  }}>()
+  props<{
+    payload: {
+      email: string,
+      password: string,
+    }
+  }>()
 )
 
 export const authSuccess = createAction(
   '[Auth] AUTH_SUCCESS',
-  props<{payload: {
-    email: string,
-    userId: string,
-    token: string,
-    expirationDate: Date,
-    redirect: boolean,
-  }}>()
+  props<{
+    payload: {
+      email: string,
+      userId: string,
+      token: string,
+      expirationDate: Date,
+      redirect: boolean,
+    }
+  }>()
 )
 
 export const authFailure = createAction(
   '[Auth] AUTH_FAILURE',
-  props<{payload: {
-    error: string
-  }}>()
+  props<{
+    payload: {
+      error: string
+    }
+  }>()
 )
 
 export const signupStart = createAction(
   '[Auth] SIGNUP_START',
-  props<{payload: {
-    email: string,
-    password: string,
-  }}>()
+  props<{
+    payload: {
+      email: string,
+      password: string,
+    }
+  }>()
 )
 
 export const clearError = createAction(

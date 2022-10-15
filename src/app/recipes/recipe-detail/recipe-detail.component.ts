@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router'
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { map, switchMap } from 'rxjs';
@@ -17,33 +17,33 @@ export class RecipeDetailComponent implements OnInit {
   id: any;
 
   constructor(
-              private route: ActivatedRoute,
-              private router: Router,
-              private store: Store<AppState>,
-              ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit(): void {
     this.route.params
-    .pipe(
-      map(params => +params['id']),
-      switchMap(id => {
-        this.id = id;
-        return this.store.select('recipes');
-      }),
-      map(recipesState => recipesState.recipes.find((recipe, index) => index === this.id))
+      .pipe(
+        map(params => +params['id']),
+        switchMap(id => {
+          this.id = id;
+          return this.store.select('recipes');
+        }),
+        map(recipesState => recipesState.recipes.find((recipe, index) => index === this.id))
       )
       .subscribe(recipe => {
         this.recipe = recipe;
       });
-    }
+  }
 
 
   onAddToShoppingList() {
-    this.store.dispatch(addIngredients({payload: this.recipe.ingredients}));
+    this.store.dispatch(addIngredients({ payload: this.recipe.ingredients }));
   }
 
   onDeleteRecipe() {
-    this.store.dispatch(deleteRecipes({payload: this.id}));
+    this.store.dispatch(deleteRecipes({ payload: this.id }));
     this.router.navigate(['/recipes']);
   }
 }
